@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>playin around</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="wtf.css" type="text/css" />
+</head>
+
+<body>
+    <img class="rotateimg" src="smiley.png" height="120"/>
+    <!-- lets try to get em rotating clockwise and counterclockwise inside of each other... -->
+    <div id="outerdiv" class="triangle-up rotate">
+        <div id="innerdiv" class="triangle-down minusrotate"></div>
+    </div>
+    <div class="perspective">
+        <div class="cube"></div>
+    </div>
+    <h1>just some js</h1>
+    <h2 id="subline">changed by</h2>
+    <form action="#" name="tryinhard">
+        <input v-input name="supi" type="text" value="" />
+        <input v-input name="butti" type="number" value="" />
+        <button name="reset">reset</button>
+        <input type="submit" value="submit" name="submit" />
+    </form>
+    <p id="current-0">&nbsp;</p>
+    <p id="current-1">&nbsp;</p>
+    <div id="counter">&nbsp;</div>
+    <div id="date">&nbsp;</div>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

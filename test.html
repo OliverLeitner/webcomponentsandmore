@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Scratch component tryout</title>
+</head>
+
+<body>
+    <!-- firefox needs a polyfill -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-hi.js"></script>
+    <link rel="import" type="module" href="/mycomponent.html">
+    <my-component data-test></my-component>
+</body>
+
+<script>
+    fetch('http://headers.jsontest.com/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    }).then((response) => {
+        if (response.ok) {
+            return response.json()
+        }
+    }).then((json) => {
+        document.querySelector('my-component').setAttribute("data-test", JSON.stringify(json));
+    })
+</script>
+
+</html>

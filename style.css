@@ -1,0 +1,83 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: green;
+    font-size: 14pt;
+    background-color: white;
+}
+
+form {
+    background-color: aquamarine;
+}
+
+.changed {
+    border: 5px solid red;
+}
+
+.rotateimg {
+    margin-bottom: 50px;
+    transition: transform .7s ease-in-out;
+}
+
+.rotateimg:hover {
+    -webkit-transform:rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+/* ENDLESS ROTATE */
+.rotate {
+    animation: customrotate 1.5s linear infinite; 
+}
+@keyframes customrotate {
+  to{ transform: rotate(360deg); }
+}
+
+.minusrotate {
+    animation: rotate .5s linear infinite; 
+}
+@keyframes rotate {
+  to{ transform: rotate(360deg); }
+}
+
+.triangle-up {
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 150px solid green;
+    /*border-top: 150px solid transparent;*/
+    display: inline-block;
+}
+
+.triangle-down {
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-top: 100px solid red;
+    display: inline-block;
+}
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 30px solid blue;
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 30px solid magenta;
+}
+
+#outerdiv {
+    margin-top: 100px;
+}
+
+#innerdiv {
+    position: absolute;
+    top: 16vh;
+    left: -6.5vw;
+}

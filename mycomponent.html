@@ -1,0 +1,48 @@
+<template id="x-foo-from-template">
+    <style>
+        #datacollection {
+            color: green;
+        }
+    </style>
+    <div id="datacollection">&nbsp;</div>
+    <slot></slot>
+</template>
+
+<script>
+    let tmpl = document.querySelector('#x-foo-from-template');
+    class MyComponent extends HTMLElement {
+        shadowRoot = this.attachShadow({ mode: 'open' })
+
+        static get observedAttributes() { return ['data-test']; } // observable tags
+
+        constructor() {
+            super(); // grab all the htmlelement features
+            this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
+        }
+
+        connectedCallback() {
+            let myElement = document.createElement("div"); // creating elements to be added to shadowroot "slot"
+            myElement.innerHTML = "some demo text";
+            this.shadowRoot.appendChild(myElement) // append them to the shadowroot
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            try {
+                if (newValue)
+                    this.createDivElement("host", "datacollection", JSON.parse(newValue).Host);
+            } catch (error) {
+                console.error(error) // something failed
+            }
+        }
+
+        async createDivElement(id = "host", rootId = "datacollection", data) {
+            if (data) {
+                let hostDiv = document.createElement("div");
+                hostDiv.id = id;
+                hostDiv.innerHTML = "<strong>" + data + "</strong>";
+                this.shadowRoot.getElementById(rootId).appendChild(hostDiv);
+            }
+        }
+    }
+    window.customElements.define('my-component', MyComponent); // bind to our component
+</script>
