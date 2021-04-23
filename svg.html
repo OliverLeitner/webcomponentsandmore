@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>svg playground</title>
+</head>
+<body>
+    <h1>svg playground</h1>
+    <div class="svg">
+        <!-- r is circle radius -->
+        <svg width="100" height="100">
+            <circle id="mycircle" cx="50" cy="50" r="40"/>
+        </svg>
+        <!-- circle is round, rect... -->
+        <svg width="400" height="100">
+            <rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+        </svg>
+        <!-- drawing a line in svg -->
+        <svg id = "svgelem" height = "200" xmlns = "http://www.w3.org/2000/svg">
+            <line x1 = "0" y1 = "0" x2 = "200" y2 = "100"
+                  style = "stroke:red;stroke-width:2"/>
+        </svg>
+        <!-- rx and ry are rounding degrees -->
+        <svg width="400" height="180">
+            <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
+                style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+        </svg>
+        <!-- polygon... invest into points values ... time ... -->
+        <svg width="300" height="200">
+              <polygon points="100,10 40,198 190,78 10,78 160,198"
+                style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+        </svg>
+        <!-- also connected line aka polyline -->
+        <svg id="svgelem" height="200" xmlns="http://www.w3.org/2000/svg">
+            <polyline id="mypoly" points="0,0 0,20 20,20 20,40 40,40 40,60" stroke="red" />
+        </svg>
+        <!-- read up about defs, and find out more about lineargradient here ... -->
+        <svg height="130" width="500">
+            <defs>
+                <!-- nother possibility: radialGradient -->
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <ellipse cx="100" cy="70" rx="85" ry="55" fill="url(#grad1)" />
+            <text fill="#ffffff" font-size="45" font-family="Verdana" x="50" y="86">SVG</text>
+            Sorry, your browser does not support inline SVG.
+        </svg>
+    </div>
+    <div class="custom">
+        <!-- xmlns definition of namespace, 2000 dated standard -->
+        <!-- height and width on outer element possible -->
+        <!-- read up on viewbox="startx starty endx endy" -->
+        <!-- ref cannot override orig settings -->
+        <!-- ref can override x and y positioning -->
+        <svg
+            id="customelem"
+            width="580"
+            height="369"
+            viewbox="0 0 580 369"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            type="image/svg+xml">
+            <!-- https://www.youtube.com/watch?v=dEu28JHjEh4&list=RDdEu28JHjEh4&start_radio=1 -->
+            <foreignObject id="youtubelink" width="570" height="359">
+                <iframe id="yt" xmlns="http://www.w3.org/1999/xhtml"
+                    width="560"
+                    height="349"
+                    src="http://www.youtube.com/embed/dEu28JHjEh4"
+                    data-mytext="hello world"
+                    frameborder="0">
+                </iframe>
+            </foreignObject>
+            <desc>a test description something...</desc>
+            <style type="text/css">
+                /*@namespace url(http://www.w3.org/2000/svg);
+                @namespace xml url(http://www.w3.org/XML/1998/namespace);*/
+                #customelem {
+                    border: 2px solid navy;
+                    background-color: navy;
+                    transform: rotate(45deg);
+                    /*-webkit-animation:spin 4s linear infinite;
+                    -moz-animation:spin 4s linear infinite;
+                    animation:spin 4s linear infinite;*/
+                }
+                #yt {
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                    height: 100%;
+                    overflow: auto;
+                }
+                @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+                @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+                @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+            </style>
+            <!-- you can either use to for styling -->
+            <g class="hostoverride" fill="blue" stroke="brown" stroke-width="10">
+                <use href="#mycircle" x=50 y=50/>
+            </g>
+            <!-- or directly, only important: no predefineds on the orig -->
+            <!-- inner overrides outer -->
+            <g fill="yellow">
+                <use href="#mypoly" fill="blue"/>
+            </g>
+            <!-- loading an svg element from an external file -->
+            <use href="external.svg#external-g">
+                <div data-mydiv="divdata">nother dom</div>
+            </use>
+            <use href="#yt">
+                <script type="text/javascript">
+                    // accessing data 'metadata' element from referenced youtube iframe
+                    // does not work for grabbing from external uses
+                    console.log(document.querySelector('[data-mydiv]').dataset.mydiv)
+                </script>
+            </use>
+            <!-- svg inside of svg -->
+            <svg id="custominner">
+                <rect width="50" height="50" fill="purple" stroke="black" stroke-width="5"/>
+            </svg>
+        </svg>
+        <!-- built in systemLanguage prop contains given system language... useful... -->
+        <svg viewBox="0 -20 100 50">
+            <title>Favourite</title>
+            <title lang="en-us">Favorite</title>
+            <title lang="nl">Favoriet</title>
+            <title lang="de">Favorit</title>
+            <title lang="">★</title>
+            <switch>
+            <text systemLanguage="ar">مرحبا</text>
+            <text systemLanguage="de,nl">Hallo!</text>
+            <text systemLanguage="en-us">Howdy!</text>
+            <text systemLanguage="en-gb">Wotcha!</text>
+            <text systemLanguage="en-au">G'day!</text>
+            <text systemLanguage="en">Hello!</text>
+            <text systemLanguage="es">Hola!</text>
+            <text systemLanguage="fr">Bonjour!</text>
+            <text systemLanguage="ja">こんにちは</text>
+            <text systemLanguage="ru">Привет!</text>
+            <text>☺</text>
+            </switch>
+        </svg>
+    </div>
+</body>
+</html>
